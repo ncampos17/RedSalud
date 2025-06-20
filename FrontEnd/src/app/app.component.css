@@ -1,0 +1,14 @@
+/* Hace que el header quede fijo arriba */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Asegura que el contenido de abajo no quede tapado */
+.main-container {
+  margin-top: 70px; /* Debe coincidir con la altura del header */
+  padding: 20px;
+}
