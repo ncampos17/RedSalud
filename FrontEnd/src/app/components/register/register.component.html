@@ -1,0 +1,34 @@
+<div class="register">
+  <h2 class="register__titulo">Crear cuenta</h2>
+
+  <form class="register__form">
+    <label for="nombre" class="register__label">Nombre completo</label>
+    <input
+      type="text"
+      id="nombre"
+      class="register__input"
+      placeholder="Ej: Juan Pérez"
+    />
+
+    <label for="correo" class="register__label">Correo electrónico</label>
+    <input
+      type="email"
+      id="correo"
+      class="register__input"
+      placeholder="Ej: juan@redsalud.cl"
+    />
+
+    <label for="contrasena" class="register__label">Contraseña</label>
+    <input
+      type="password"
+      id="contrasena"
+      class="register__input"
+      placeholder="Mínimo 8 caracteres"
+    />
+
+    <button type="submit" class="register__boton">Registrarse</button>
+  </form>
+
+  <a routerLink="/" class="register__volver">← Volver al inicio</a>
+</div>
+

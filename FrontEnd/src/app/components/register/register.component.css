@@ -1,0 +1,53 @@
+.register {
+  background-color: white;
+  padding: 30px;
+  max-width: 400px;
+  margin: 100px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.register__titulo {
+  text-align: center;
+  color: #008b8b;
+  margin-bottom: 20px;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.register__input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.register__boton {
+  background-color: #008b8b;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.register__boton:hover {
+  background-color: #006666;
+}
+
+.register__volver {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #008b8b;
+  text-decoration: underline;
+}
