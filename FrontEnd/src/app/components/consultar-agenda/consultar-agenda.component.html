@@ -1,0 +1,94 @@
+<div class="agenda-container">
+  <h2 class="agenda-title">Consultar Agenda de Boxes</h2>
+
+  <div class="filters-section">
+    <h3>Filtros de Búsqueda</h3>
+    <div class="filter-grid">
+      <div class="filter-group">
+        <label for="filterDay">Día:</label>
+        <select id="filterDay" [(ngModel)]="filterDay" (change)="onFilterChange()" class="filter-select">
+          <option value="">-- Todos los Días --</option>
+          <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterSpecialty">Especialidad:</label>
+        <select id="filterSpecialty" [(ngModel)]="filterSpecialty" (change)="onFilterChange()" class="filter-select">
+          <option value="">-- Todas las Especialidades --</option>
+          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterProfessional">Profesional:</label>
+        <select id="filterProfessional" [(ngModel)]="filterProfessionalId" (change)="onFilterChange()" class="filter-select">
+          <option value="">-- Todos los Profesionales --</option>
+          <ng-container *ngIf="filterSpecialty; else allProfs">
+            <option *ngFor="let prof of filteredProfessionalsForFilter" [value]="prof.id">{{ prof.name }}</option>
+          </ng-container>
+          <ng-template #allProfs>
+             <option *ngFor="let prof of allProfessionals" [value]="prof.id">{{ prof.name }}</option>
+          </ng-template>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterFloor">Piso:</label>
+        <select id="filterFloor" [(ngModel)]="filterFloor" (change)="onFilterChange()" class="filter-select">
+          <option value="">-- Todos los Pisos --</option>
+          <option *ngFor="let floor of floors" [value]="floor">{{ floor }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterBox">Box:</label>
+        <select id="filterBox" [(ngModel)]="filterBox" (change)="onFilterChange()" class="filter-select">
+          <option value="">-- Todos los Boxes --</option>
+          <ng-container *ngIf="filterFloor">
+            <option *ngFor="let i of [1,2,3,4,5]" [value]="'Box ' + i">{{ 'Box ' + i }}</option>
+          </ng-container>
+          </select>
+      </div>
+    </div>
+    <button class="reset-button" (click)="resetFilters()">Limpiar Filtros</button>
+  </div>
+
+  <hr>
+
+  <div class="results-section">
+    <h3>Resultados de la Agenda ({{ filteredReservations.length }} reservas)</h3>
+
+    <div *ngIf="filteredReservations.length === 0" class="no-results">
+      <p>No hay reservas que coincidan con los filtros aplicados.</p>
+      <p>Intenta limpiar los filtros o realizar una nueva búsqueda.</p>
+    </div>
+
+    <table class="reservations-table" *ngIf="filteredReservations.length > 0">
+      <thead>
+        <tr>
+          <th>Día</th>
+          <th>Hora</th>
+          <th>Profesional</th>
+          <th>Especialidad</th>
+          <th>Piso</th>
+          <th>Box</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of filteredReservations">
+          <td>{{ reservation.day }}</td>
+          <td>{{ reservation.time }}</td>
+          <td>{{ reservation.professional?.name || 'N/A' }}</td>
+          <td>{{ reservation.specialty }}</td>
+          <td>{{ reservation.floor }}</td>
+          <td>{{ reservation.box }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a class="back-link" [routerLink]="['/dashboard']">
+    ← Volver al menú principal
+  </a>
+</div>

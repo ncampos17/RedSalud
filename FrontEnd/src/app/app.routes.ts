@@ -11,6 +11,6 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'reservar-box', loadComponent: () => import('./components/reservar-box/reservar-box.component').then(m => m.ReservarBoxComponent) },
   { path: 'consultar-agenda', loadComponent: () => import('./components/consultar-agenda/consultar-agenda.component').then(m => m.ConsultarAgendaComponent) },
-  { path: 'ver-reportes', loadComponent: () => import('./components/reporte/reporte.component').then(m => m.ReporteComponent) }
+  { path: 'ver-reportes', loadComponent: () => import('./components/reporte/reporte.component').then(m => m.ReporteOcupacionComponent) }
 ];
 

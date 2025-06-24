@@ -1,39 +1,208 @@
-.reporte {
-  background-color: white;
-  padding: 30px;
-  max-width: 700px;
-  margin: 100px auto;
+/* Importar Font Awesome si no está globalmente */
+/* @import "~@fortawesome/fontawesome-free/css/all.min.css"; */
+
+
+.report-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 35px;
+  background-color: #f8fafd; /* Un blanco azulado muy suave */
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Arial, sans-serif; /* Fuente moderna */
+  color: #333;
+}
+
+.report-title {
+  text-align: center;
+  color: #1a73e8; /* Azul más vibrante */
+  margin-bottom: 40px;
+  font-size: 2.5em;
+  font-weight: 700; /* Más audaz */
+  letter-spacing: -0.5px;
+}
+
+/* --- Seccion de Tarjetas Resumen --- */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columnas o ajustables */
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.reporte__titulo {
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  font-size: 2.5em;
+  margin-right: 20px;
+  color: #4285f4; /* Azul de Google */
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.card-label {
+  font-size: 0.95em;
+  color: #666;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-value {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1a73e8;
+  margin: 0;
+}
+
+.card-value-sm {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #1a73e8;
+  margin: 0;
+}
+
+.card-sub-value {
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Colores específicos para las tarjetas de resumen */
+.total-reservas-card .card-icon { color: #f4b400; } /* Amarillo */
+.top-specialty-card .card-icon { color: #0f9d58; } /* Verde */
+.top-floor-card .card-icon { color: #db4437; } /* Rojo */
+
+
+/* --- Secciones de Reporte (Tablas) --- */
+.report-section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+}
+
+.report-section h3 {
+  color: #3f51b5; /* Azul índigo */
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  font-weight: 600;
   text-align: center;
-  color: #008b8b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-section h3 .icon-left {
+  margin-right: 10px;
+  font-size: 1.2em;
+  color: #4285f4;
+}
+
+
+.no-data-card {
+  text-align: center;
+  color: #777;
+  padding: 30px;
+  background-color: #f0f4f7;
+  border-radius: 8px;
+  border: 1px dashed #c1d3e0;
   margin-bottom: 20px;
+  font-style: italic;
 }
 
-.reporte__tabla {
+/* Estilos de tabla general */
+.data-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Permite border-radius en thead */
+  border-spacing: 0; /* Elimina espacio entre celdas */
+  margin-top: 20px;
+  font-size: 0.95em;
 }
 
-.reporte__tabla th,
-.reporte__tabla td {
-  padding: 10px;
-  border: 1px solid #ccc;
+.data-table thead {
+  background-color: #e8f0fe; /* Fondo azul claro para el encabezado */
+  border-radius: 8px 8px 0 0; /* Bordes redondeados solo arriba */
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table th {
+  color: #1a73e8; /* Texto azul para encabezados */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none; /* Sin borde en la última fila */
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #fbfdff; /* Raya zebra sutil */
+}
+
+.data-table tbody tr:hover {
+  background-color: #e3f2fd; /* Resaltar al pasar el mouse */
+  cursor: default;
+}
+
+/* Detalles por piso */
+.floor-detail-panel {
+  background-color: #f7fcff; /* Fondo ligeramente diferente para anidar */
+  padding: 20px;
+  margin-top: 25px;
+  border: 1px solid #d0e7ff;
+}
+
+.floor-detail-panel h4 {
+  color: #007bff;
+  margin-bottom: 15px;
+  font-size: 1.4em;
   text-align: center;
 }
 
-.reporte__tabla thead {
-  background-color: #008b8b;
-  color: white;
+.compact-table th,
+.compact-table td {
+  padding: 10px 15px; /* Menos padding para tablas anidadas */
+  font-size: 0.9em;
 }
 
-.reporte__volver {
+.back-link {
   display: block;
   text-align: center;
-  margin-top: 20px;
-  color: #008b8b;
+  margin-top: 50px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2em;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.back-link:hover {
+  color: #0d47a1;
   text-decoration: underline;
+  transform: translateX(-5px);
 }
