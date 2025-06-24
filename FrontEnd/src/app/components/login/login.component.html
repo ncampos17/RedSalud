@@ -17,15 +17,32 @@
       class="login__input"
       placeholder="Contraseña"
     />
-    <a routerLink="/recuperar" class="login__link">¿Olvidó su contraseña?</a>
+
+    
+      <a
+        type="routerLink"
+        class="login_routerLink login_link"
+        [routerLink]="['/recuperar']"
+      >
+        ¿Olvidó su contraseña?
+      </a>
 
     <div class="login__botones">
-  <button type="button" class="login__boton login__boton--registro" routerLink="/registro">
-    Registrarse
-  </button>
+      <button
+        type="button"
+        class="login_boton login_boton--registro"
+        [routerLink]="['/registro']"
+      >
+        Registrarse
+      </button>
 
-  <button type="submit" class="login__boton login__boton--iniciar">
-    Iniciar sesión
-  </button>
-</div>
- 
+    <button
+        type="button"
+        class="login_boton login_boton--iniciar"
+        [routerLink]="['/dashboard']"
+      >
+        Iniciar sesión
+      </button>
+    </div>
+  </form>
+ </div>

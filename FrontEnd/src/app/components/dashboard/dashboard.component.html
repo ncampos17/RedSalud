@@ -2,9 +2,15 @@
   <h2 class="dashboard__titulo">Menú principal</h2>
 
   <div class="dashboard__botones">
-    <button class="dashboard__boton">Reservar Box</button>
+      <button
+        type="button"
+        class="dashboard_boton dashboard_boton"
+        [routerLink]="['/reservar-box']"
+      >
+        Reservar Box
+      </button>
     <button class="dashboard__boton">Consultar Agenda</button>
     <button class="dashboard__boton">Modificar Especialidad</button>
     <button class="dashboard__boton">Ver Reportes</button>
-  </div>
+  </div>
 </div>
