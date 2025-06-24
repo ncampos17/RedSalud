@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-reservar-box',
   standalone: true,
-  template: `<h2>Reservar Box</h2><p>Vista para reservar box.</p>`
+  imports: [RouterModule],
+  templateUrl: './reservar-box.component.html',
+  styleUrl: './reservar-box.component.css'
 })
-export class ReservarBoxComponent {}
+export class ReservarBoxComponent {
+
+}
