@@ -8,4 +8,3 @@ Creadores:
 - Ricardo Chirinos - rchirinosg@correo.uss.cl
 - Jesús Contreras - jcontrerasg5@correo.uss.cl
 
-xd
