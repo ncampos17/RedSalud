@@ -1,53 +1,201 @@
-.reservar {
-  background-color: white;
-  padding: 30px;
-  max-width: 400px;
-  margin: 100px auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
+/* Usamos variables para mantener consistencia en los colores */
+:host {
+  --primary-color: #007bff;
+  --primary-color-dark: #0056b3;
+  --secondary-color: #f0f4f8;
+  --border-color: #dee2e6;
+  --text-color: #333;
+  --text-color-light: #fff;
+  --success-color: #28a745;
+  --success-color-dark: #1e7e34;
+  --danger-color: #dc3545;
+  --selected-color: #ffc107;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.reservar__titulo {
+.booking-container {
+  font-family: var(--font-family);
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.booking-title {
   text-align: center;
-  color: #008b8b;
-  margin-bottom: 20px;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-.reservar__form {
+/* Estilos para los filtros */
+.filters {
   display: flex;
-  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
 }
 
-.reservar__label {
-  font-weight: bold;
-  margin-bottom: 5px;
+.filter-group {
+  flex: 1;
+  min-width: 250px;
 }
 
-.reservar__input {
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.reservar__boton {
-  background-color: #008b8b;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.reservar__boton:hover {
-  background-color: #006666;
-}
-
-.reservar__volver {
+.filter-label {
   display: block;
-  text-align: center;
-  margin-top: 20px;
-  color: #008b8b;
-  text-decoration: underline;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos para la grilla de horarios */
+.schedule-grid-wrapper {
+  margin-top: 2rem;
+}
+
+.grid-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: auto repeat(7, 1fr); /* 1 columna para la hora + 7 para los días */
+  gap: 5px;
+  text-align: center;
+}
+
+.grid-header {
+  font-weight: bold;
+  padding: 0.75rem 0.5rem;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.time-label {
+  font-weight: 600;
+  padding: 0.75rem 0.5rem;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+.time-slot {
+  padding: 0.75rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s;
+  background-color: #fff;
+}
+
+.time-slot:hover {
+  background-color: #e9ecef;
+  transform: scale(1.05);
+}
+
+/* Estilos para los estados de los slots */
+.time-slot.selected {
+  background-color: var(--selected-color);
+  color: var(--text-color);
+  font-weight: bold;
+  border-color: var(--selected-color);
+}
+
+.time-slot.booked {
+  background-color: var(--danger-color);
+  cursor: not-allowed;
+  color: var(--text-color-light);
+  border-color: var(--danger-color);
+  position: relative;
+  opacity: 0.7;
+}
+
+/* Agrega una 'X' a los slots ocupados */
+.time-slot.booked::after {
+    content: 'X';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+
+/* Sección de confirmación */
+.confirmation-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 2px dashed var(--primary-color);
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.selection-summary {
+  font-size: 1rem;
+}
+
+.selection-summary span {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.confirm-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color-light);
+  background-color: var(--success-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-button:hover {
+  background-color: var(--success-color-dark);
+}
+
+/* Vínculo para volver */
+.back-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: var(--primary-color-dark);
+  text-decoration: underline;
+}
+

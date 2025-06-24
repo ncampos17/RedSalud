@@ -1,31 +1,89 @@
-<div class="reservar">
-  <h2 class="reservar__titulo">Reservar Box</h2>
+<div class="booking-container">
+  <h2 class="booking-title">Reservar Box</h2>
 
-  <form class="reservar__form">
-    <label for="especialidad" class="reservar__label">Especialidad</label>
-    <select id="especialidad" class="reservar__input">
-      <option disabled selected>Seleccione una especialidad</option>
-      <option>Medicina General</option>
-      <option>Ginecología</option>
-      <option>Odontología</option>
-      <option>Pediatría</option>
-    </select>
+  <div class="filters">
+    <div class="filter-group">
+      <label for="specialty" class="filter-label">1. Seleccione Especialidad</label>
+      <select id="specialty" class="filter-select" [(ngModel)]="selectedSpecialty" (change)="onSpecialtyChange()">
+        <option value="" disabled>-- Elija una especialidad --</option>
+        <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+      </select>
+    </div>
 
-    <label for="fecha" class="reservar__label">Fecha</label>
-    <input type="date" id="fecha" class="reservar__input" />
+    <div class="filter-group" *ngIf="selectedSpecialty">
+      <label for="professional" class="filter-label">2. Seleccione Profesional</label>
+      <select id="professional" class="filter-select" [(ngModel)]="selectedProfessionalId" (change)="onProfessionalChange()">
+        <option value="" disabled>-- Elija un profesional --</option>
+        <option *ngFor="let prof of filteredProfessionals" [value]="prof.id">{{ prof.name }}</option>
+      </select>
+    </div>
 
-    <label for="hora" class="reservar__label">Hora</label>
-    <input type="time" id="hora" class="reservar__input" />
+    <div class="filter-group" *ngIf="selectedProfessionalId">
+      <label for="floor" class="filter-label">3. Seleccione Piso</label>
+      <select id="floor" class="filter-select" [(ngModel)]="selectedFloor" (change)="onFloorChange()">
+        <option value="" disabled>-- Elija un piso --</option>
+        <option *ngFor="let floor of floors" [value]="floor">{{ floor }}</option>
+      </select>
+    </div>
 
-    <button type="submit" class="reservar__boton">Confirmar Reserva</button>
-  </form>
+    <div class="filter-group" *ngIf="selectedFloor">
+      <label for="box" class="filter-label">4. Seleccione Box</label>
+      <select id="box" class="filter-select" [(ngModel)]="selectedBox" (change)="onBoxChange()">
+        <option value="" disabled>-- Elija un box --</option>
+        <option *ngFor="let box of boxes" [value]="box">{{ box }}</option>
+      </select>
+    </div>
+  </div>
 
-    <a
-      class="reservar__volver"
-      [routerLink]="['/dashboard']"
-    >
-        ← Volver al menú principal
-    </a>
+  <div class="schedule-grid-wrapper" *ngIf="selectedSpecialty && selectedProfessionalId && selectedFloor && selectedBox">
+    <h3 class="grid-title">5. Seleccione un Horario Disponible</h3>
+    <div class="schedule-grid">
+      <div class="grid-header">Día / Hora</div>
+      <div *ngFor="let day of daysOfWeek" class="grid-header">{{ day }}</div>
 
+      <ng-container *ngFor="let time of timeSlots">
+        <div class="time-label">{{ time }}</div>
+        <div
+          *ngFor="let day of daysOfWeek"
+          class="time-slot"
+          (click)="selectSlot(day, time)"
+          [ngClass]="{
+            'selected': currentSelection?.day === day && currentSelection?.time === time && currentSelection?.professional?.id === stringToNumber(selectedProfessionalId) && currentSelection?.floor === stringToNumber(selectedFloor) && currentSelection?.box === selectedBox,
+            'booked': getPotentialSlotReservation(day, time) && isBoxBooked(getPotentialSlotReservation(day, time)!)
+          }">
+        </div>
+      </ng-container>
+    </div>
+  </div>
 
- </div>
+  <div class="confirmation-section" *ngIf="currentSelection">
+    <div class="selection-summary">
+      <p><strong>Ha seleccionado:</strong></p>
+      <span>Especialidad: <strong>{{ currentSelection.specialty }}</strong></span>
+      <span>Profesional: <strong>{{ currentSelection.professional?.name }}</strong></span>
+      <span>Ubicación: <strong>Piso {{ currentSelection.floor }}, {{ currentSelection.box }}</strong></span>
+      <span>Horario: <strong>{{ currentSelection.day }}, {{ currentSelection.time }} hrs.</strong></span>
+    </div>
+    <button (click)="confirmReservation()" class="confirm-button">Confirmar Reserva</button>
+  </div>
+
+  ---
+
+  <div class="current-reservations" *ngIf="confirmedReservations.length > 0">
+    <h3 class="current-reservations-title">Reservas Actuales</h3>
+    <ul class="reservations-list">
+      <li *ngFor="let res of confirmedReservations" class="reservation-item">
+        <p>
+          Profesional: <strong>{{ res.professional?.name }}</strong> ({{ res.specialty }})<br>
+          Ubicación: <strong>Piso {{ res.floor }}, {{ res.box }}</strong><br>
+          Fecha/Hora: <strong>{{ res.day }} {{ res.time }} hrs.</strong>
+        </p>
+        <button class="cancel-button" (click)="cancelReservation(res)">Cancelar</button>
+      </li>
+    </ul>
+  </div>
+
+  <a class="back-link" [routerLink]="['/dashboard']">
+    ← Volver al menú principal
+  </a>
+</div>
