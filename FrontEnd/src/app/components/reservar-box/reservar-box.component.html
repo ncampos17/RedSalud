@@ -1,0 +1,31 @@
+<div class="reservar">
+  <h2 class="reservar__titulo">Reservar Box</h2>
+
+  <form class="reservar__form">
+    <label for="especialidad" class="reservar__label">Especialidad</label>
+    <select id="especialidad" class="reservar__input">
+      <option disabled selected>Seleccione una especialidad</option>
+      <option>Medicina General</option>
+      <option>Ginecología</option>
+      <option>Odontología</option>
+      <option>Pediatría</option>
+    </select>
+
+    <label for="fecha" class="reservar__label">Fecha</label>
+    <input type="date" id="fecha" class="reservar__input" />
+
+    <label for="hora" class="reservar__label">Hora</label>
+    <input type="time" id="hora" class="reservar__input" />
+
+    <button type="submit" class="reservar__boton">Confirmar Reserva</button>
+  </form>
+
+    <a
+      class="reservar__volver"
+      [routerLink]="['/dashboard']"
+    >
+        ← Volver al menú principal
+    </a>
+
+
+ </div>
