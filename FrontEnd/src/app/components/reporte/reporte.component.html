@@ -1,0 +1,88 @@
+<div class="report-container">
+  <h2 class="report-title">Reporte de Ocupación de Boxes</h2>
+
+  <div class="summary-cards-grid">
+    <div class="card summary-card total-reservas-card">
+      <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
+      <div class="card-content">
+        <p class="card-label">Total de Reservas</p>
+        <p class="card-value">{{ totalReservationsCount }}</p>
+      </div>
+    </div>
+
+    <div class="card summary-card top-specialty-card" *ngIf="specialtyOccupations.length > 0">
+      <div class="card-icon"><i class="fas fa-stethoscope"></i></div>
+      <div class="card-content">
+        <p class="card-label">Especialidad Más Demandada</p>
+        <p class="card-value-sm">{{ specialtyOccupations[0].specialty }}</p>
+        <p class="card-sub-value">({{ specialtyOccupations[0].totalBoxesOccupied }} reservas)</p>
+      </div>
+    </div>
+
+    <div class="card summary-card top-floor-card" *ngIf="floorOccupations.length > 0">
+      <div class="card-icon"><i class="fas fa-building"></i></div>
+      <div class="card-content">
+        <p class="card-label">Piso con Mayor Ocupación</p>
+        <p class="card-value-sm">Piso {{ floorOccupations[0].floor }}</p>
+        <p class="card-sub-value">({{ floorOccupations[0].totalBoxesOccupied }} reservas)</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="report-section">
+    <h3><i class="fas fa-user-md icon-left"></i> Ocupación por Especialidad</h3>
+    <div *ngIf="specialtyOccupations.length === 0" class="no-data-card">
+      <p>No hay datos de ocupación por especialidad para mostrar.</p>
+    </div>
+    <table class="data-table styled-table" *ngIf="specialtyOccupations.length > 0">
+      <thead>
+        <tr>
+          <th>Especialidad</th>
+          <th>Reservas de Boxes</th>
+          <th>% del Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of specialtyOccupations">
+          <td>{{ item.specialty }}</td>
+          <td>{{ item.totalBoxesOccupied }}</td>
+          <td>{{ (item.totalBoxesOccupied / totalReservationsCount * 100) | number:'1.0-1' }}%</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+  <hr>
+
+  <div class="report-section">
+    <h3><i class="fas fa-map-marked-alt icon-left"></i> Ocupación por Piso</h3>
+    <div *ngIf="floorOccupations.length === 0" class="no-data-card">
+      <p>No hay datos de ocupación por piso para mostrar.</p>
+    </div>
+    <div *ngFor="let floor of floorOccupations" class="floor-detail-panel card">
+      <h4>Piso {{ floor.floor }} ({{ floor.totalBoxesOccupied }} reservas)</h4>
+      <table class="data-table styled-table compact-table">
+        <thead>
+          <tr>
+            <th>Box</th>
+            <th>Reservas en este Box</th>
+            <th>% en este Piso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let boxDetail of floor.boxesDetail">
+            <td>{{ boxDetail.box }}</td>
+            <td>{{ boxDetail.count }}</td>
+            <td>{{ (boxDetail.count / floor.totalBoxesOccupied * 100) | number:'1.0-1' }}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <a class="back-link" [routerLink]="['/dashboard']">
+    ← Volver al menú principal
+  </a>
+</div>

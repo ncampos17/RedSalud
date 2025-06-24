@@ -4,13 +4,24 @@
   <div class="dashboard__botones">
       <button
         type="button"
-        class="dashboard_boton dashboard_boton"
+        class="dashboard__boton dashboard__boton"
         [routerLink]="['/reservar-box']"
       >
         Reservar Box
       </button>
-    <button class="dashboard__boton">Consultar Agenda</button>
-    <button class="dashboard__boton">Modificar Especialidad</button>
-    <button class="dashboard__boton">Ver Reportes</button>
+    <button
+        type="button"
+        class="dashboard__boton dashboard__boton"
+        [routerLink]="['/consultar-agenda']"
+      >
+        Consultar Agenda
+      </button>
+    <button
+        type="button"
+        class="dashboard__boton dashboard__boton"
+        [routerLink]="['/ver-reportes']"
+      >
+        Ver Reporte
+      </button>
   </div>
 </div>
