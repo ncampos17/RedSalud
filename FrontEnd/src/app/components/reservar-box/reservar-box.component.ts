@@ -255,4 +255,32 @@ export class ReservarBoxComponent implements OnInit {
   stringToNumber(value: string): number {
     return Number(value);
   }
+
+  filterProfessionalId: string = '';
+filterFloor: string = '';
+filterBox: string = '';
+filterDateTime: string = '';
+
+get filteredReservations() {
+  return this.confirmedReservations.filter(res => {
+    const matchesProfessional = !this.filterProfessionalId || res.professional?.id === Number(this.filterProfessionalId);
+    const matchesFloor = !this.filterFloor || res.floor === Number(this.filterFloor);
+    const matchesBox = !this.filterBox || res.box === this.filterBox;
+    const matchesDateTime =
+      !this.filterDateTime ||
+      res.day.toLowerCase().includes(this.filterDateTime.toLowerCase()) ||
+      res.time.includes(this.filterDateTime);
+    return matchesProfessional && matchesFloor && matchesBox && matchesDateTime;
+  });
+}
+
+resetReservationFilters(): void {
+  this.filterProfessionalId = '';
+  this.filterFloor = '';
+  this.filterBox = '';
+  this.filterDateTime = '';
+}
+
+
+
 }

@@ -8,6 +8,9 @@
       id="correo"
       class="login__input"
       placeholder="ejemplo@redsalud.cl"
+      [(ngModel)]="correo"
+      name="correo"
+      required
     />
 
     <label for="contrasena" class="login__label">Contraseña</label>
@@ -16,16 +19,18 @@
       id="contrasena"
       class="login__input"
       placeholder="Contraseña"
+      [(ngModel)]="contrasena"
+      name="contrasena"
+      required
     />
 
-    
-      <a
-        type="routerLink"
-        class="login_routerLink login__link"
-        [routerLink]="['/recuperar']"
-      >
-        ¿Olvidó su contraseña?
-      </a>
+    <a
+      type="routerLink"
+      class="login_routerLink login__link"
+      [routerLink]="['/recuperar']"
+    >
+      ¿Olvidó su contraseña?
+    </a>
 
     <div class="login__botones">
       <button
@@ -36,13 +41,13 @@
         Registrarse
       </button>
 
-    <button
+      <button
         type="button"
         class="login__boton login__boton--iniciar"
-        [routerLink]="['/dashboard']"
+        (click)="iniciarSesion()"
       >
         Iniciar sesión
       </button>
     </div>
-  </form>
- </div>
+  </form>
+</div>

@@ -1,27 +1,39 @@
 <div class="dashboard">
   <h2 class="dashboard__titulo">Menú principal</h2>
 
-  <div class="dashboard__botones">
-      <button
-        type="button"
-        class="dashboard__boton dashboard__boton"
-        [routerLink]="['/reservar-box']"
-      >
-        Reservar Box
-      </button>
+  <div class="dashboard__botones" *ngIf="esAdmin; else soloConsultar">
     <button
+      type="button"
+      class="dashboard__boton dashboard__boton"
+      [routerLink]="['/reservar-box']"
+    >
+      Reservar Box
+    </button>
+    <button
+      type="button"
+      class="dashboard__boton dashboard__boton"
+      [routerLink]="['/consultar-agenda']"
+    >
+      Consultar Agenda
+    </button>
+    <button
+      type="button"
+      class="dashboard__boton dashboard__boton"
+      [routerLink]="['/ver-reportes']"
+    >
+      Ver Reporte
+    </button>
+  </div>
+
+  <ng-template #soloConsultar>
+    <div class="dashboard__botones">
+      <button
         type="button"
         class="dashboard__boton dashboard__boton"
         [routerLink]="['/consultar-agenda']"
       >
         Consultar Agenda
-      </button>
-    <button
-        type="button"
-        class="dashboard__boton dashboard__boton"
-        [routerLink]="['/ver-reportes']"
-      >
-        Ver Reporte
-      </button>
-  </div>
+      </button>
+    </div>
+  </ng-template>
 </div>

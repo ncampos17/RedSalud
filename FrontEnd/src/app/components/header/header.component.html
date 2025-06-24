@@ -1,3 +1,13 @@
 <header class="header">
   <h1 class="header__titulo">RedSalud</h1>
+  <div class="header-user" *ngIf="mostrarUsuario && nombreUsuario">
+    <span class="user-name">👤 {{ nombreUsuario }}</span>
+    <button
+      type="button"
+      class="logout-btn"
+      [routerLink]="['']"
+    >
+      Cerrar sesión
+    </button>
+  </div>
 </header>

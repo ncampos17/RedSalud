@@ -69,19 +69,51 @@
 
   ---
 
-  <div class="current-reservations" *ngIf="confirmedReservations.length > 0">
-    <h3 class="current-reservations-title">Reservas Actuales</h3>
-    <ul class="reservations-list">
-      <li *ngFor="let res of confirmedReservations" class="reservation-item">
-        <p>
-          Profesional: <strong>{{ res.professional?.name }}</strong> ({{ res.specialty }})<br>
-          Ubicación: <strong>Piso {{ res.floor }}, {{ res.box }}</strong><br>
-          Fecha/Hora: <strong>{{ res.day }} {{ res.time }} hrs.</strong>
-        </p>
-        <button class="cancel-button" (click)="cancelReservation(res)">Cancelar</button>
-      </li>
-    </ul>
+<!-- Reservas Actuales Mejoradas -->
+<div class="current-reservations" *ngIf="confirmedReservations.length > 0">
+  <h3 class="current-reservations-title">Reservas Actuales</h3>
+
+  <!-- Filtros -->
+  <div class="reservations-filters">
+    <select [(ngModel)]="filterProfessionalId" class="filter-select">
+      <option value="">Todos los profesionales</option>
+      <option *ngFor="let prof of allProfessionals" [value]="prof.id">{{ prof.name }}</option>
+    </select>
+    <select [(ngModel)]="filterFloor" class="filter-select">
+      <option value="">Todos los pisos</option>
+      <option *ngFor="let floor of floors" [value]="floor">{{ floor }}</option>
+    </select>
+    <select [(ngModel)]="filterBox" class="filter-select">
+      <option value="">Todos los boxes</option>
+      <option *ngFor="let box of boxes" [value]="box">{{ box }}</option>
+    </select>
+    <input
+      type="text"
+      [(ngModel)]="filterDateTime"
+      class="filter-select"
+      placeholder="Filtrar por día/hora"
+    />
+    <button class="reset-button" (click)="resetReservationFilters()">Limpiar</button>
   </div>
+
+  <!-- Lista de reservas filtradas -->
+  <div class="reservations-list-grid">
+    <div
+      class="reservation-card"
+      *ngFor="let res of filteredReservations"
+    >
+      <div class="reservation-info">
+        <div><strong>Profesional:</strong> {{ res.professional?.name }} ({{ res.specialty }})</div>
+        <div><strong>Ubicación:</strong> Piso {{ res.floor }}, {{ res.box }}</div>
+        <div><strong>Fecha/Hora:</strong> {{ res.day }} {{ res.time }} hrs.</div>
+      </div>
+      <button class="cancel-button" (click)="cancelReservation(res)">Cancelar</button>
+    </div>
+    <div *ngIf="filteredReservations.length === 0" class="no-results">
+      No hay reservas que coincidan con los filtros.
+    </div>
+  </div>
+</div>
 
   <a class="back-link" [routerLink]="['/dashboard']">
     ← Volver al menú principal

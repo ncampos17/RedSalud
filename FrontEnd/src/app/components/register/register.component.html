@@ -1,13 +1,16 @@
 <div class="register">
   <h2 class="register__titulo">Crear cuenta</h2>
 
-  <form class="register__form">
+  <form class="register__form" (ngSubmit)="registrarUsuario()" #form="ngForm">
     <label for="nombre" class="register__label">Nombre completo</label>
     <input
       type="text"
       id="nombre"
       class="register__input"
       placeholder="Ej: Juan Pérez"
+      [(ngModel)]="nombre"
+      name="nombre"
+      required
     />
 
     <label for="correo" class="register__label">Correo electrónico</label>
@@ -16,6 +19,9 @@
       id="correo"
       class="register__input"
       placeholder="Ej: juan@redsalud.cl"
+      [(ngModel)]="correo"
+      name="correo"
+      required
     />
 
     <label for="contrasena" class="register__label">Contraseña</label>
@@ -24,17 +30,24 @@
       id="contrasena"
       class="register__input"
       placeholder="Mínimo 8 caracteres"
+      [(ngModel)]="contrasena"
+      name="contrasena"
+      required
+      minlength="8"
     />
 
     <button type="submit" class="register__boton">Registrarse</button>
   </form>
 
+  <div *ngIf="registroExitoso" class="registro-exito">
+    ¡Registro realizado correctamente!
+  </div>
+
   <a
-        type="routerLink"
-        class="register_routerLink register__volver"
-        [routerLink]="['']"
-      >
-        ← Volver al inicio
+    type="routerLink"
+    class="register_routerLink register__volver"
+    [routerLink]="['']"
+  >
+    ← Volver al inicio
   </a>
-  
-  </div>
+</div>
