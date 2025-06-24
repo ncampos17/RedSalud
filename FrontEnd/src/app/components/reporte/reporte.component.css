@@ -1,0 +1,39 @@
+.reporte {
+  background-color: white;
+  padding: 30px;
+  max-width: 700px;
+  margin: 100px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.reporte__titulo {
+  text-align: center;
+  color: #008b8b;
+  margin-bottom: 20px;
+}
+
+.reporte__tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reporte__tabla th,
+.reporte__tabla td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.reporte__tabla thead {
+  background-color: #008b8b;
+  color: white;
+}
+
+.reporte__volver {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #008b8b;
+  text-decoration: underline;
+}
