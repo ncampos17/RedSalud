@@ -1,36 +1,46 @@
+body {
+  background: linear-gradient(135deg, #e0f7fa 0%, #fceabb 100%);
+}
+
 .dashboard {
   max-width: 600px;
   margin: 100px auto;
-  padding: 30px;
+  padding: 40px 30px;
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   text-align: center;
 }
 
 .dashboard__titulo {
   color: #008b8b;
   margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .dashboard__botones {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
 }
 
 .dashboard__boton {
-  background-color: #008b8b;
+  background: linear-gradient(90deg, #008b8b 0%, #00bfae 100%);
   color: white;
-  padding: 15px 20px;
+  padding: 18px 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  width: 200px;
+  width: 220px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, transform 0.2s;
 }
 
 .dashboard__boton:hover {
-  background-color: #006666;
+  background: linear-gradient(90deg, #006666 0%, #008b8b 100%);
+  transform: translateY(-2px) scale(1.04);
 }
